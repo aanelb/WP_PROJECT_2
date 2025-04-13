@@ -1,0 +1,22 @@
+.calendar {
+    background: #f9f9f9;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 1rem;
+    label {
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+    input[type="date"] {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      &:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+      }
+    }
+  }
+  

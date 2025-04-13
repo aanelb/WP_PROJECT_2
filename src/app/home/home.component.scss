@@ -1,0 +1,225 @@
+.home-page {
+    padding: 1rem;
+  }
+  
+  .calendar-and-events {
+    display: flex;
+    gap: 1rem;
+  
+    .calendar-container {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      width: 300px;
+      padding: 1rem;
+  
+      .calendar-header {
+        text-align: center;
+        margin-bottom: 0.5rem;
+        h2 {
+          margin-bottom: 0.3rem;
+        }
+        .month-nav {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          button {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            width: 2rem;
+            height: 2rem;
+            margin: 0 0.4rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            &:hover {
+              background: #2980b9;
+            }
+          }
+          span {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0.5rem;
+          }
+        }
+      }
+  
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.3rem;
+  
+        // Dan-naslovi (Pon - Ned)
+        .day-name {
+          background: #f9f9f9;
+          text-align: center;
+          font-weight: bold;
+          border-radius: 4px;
+          padding: 0.4rem 0;
+        }
+  
+        // Svaki week je omotan sa .week
+        .week {
+          display: contents; // "contents" pusti grid child da se rasporedi
+        }
+  
+        .calendar-day {
+          height: 70px;
+          background: #fff;
+          border-radius: 4px;
+          position: relative;
+          text-align: center;
+          border: 1px solid #f0f0f0;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          .day-num {
+            margin-top: 0.3rem;
+          }
+          &.outside {
+            color: #ccc;
+          }
+          &.has-event {
+            background: #d6f5d6;
+          }
+          &:hover {
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+          }
+          .event-marker {
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: #2ecc71;
+          }
+        }
+  
+        // Sakrivaš prazne ćelije (one izvan mjeseca) samo u posljednjoj sedmici
+        .week:last-child .calendar-day.outside {
+          display: none;
+        }
+      }
+    }
+  
+    .news-container {
+      flex: 1; /* Zauzima preostali prostor desno */
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 1rem;
+  
+      h3 {
+        margin-bottom: 1rem;
+      }
+      .news-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        .news-item {
+          background: #fafafa;
+          border: 1px solid #eee;
+          border-radius: 6px;
+          padding: 0.8rem;
+          width: calc(50% - 1rem);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          cursor: pointer;
+          &:hover {
+            transform: scale(1.02);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+          }
+          h4 {
+            margin-bottom: 0.3rem;
+          }
+          p {
+            margin-bottom: 0.3rem;
+          }
+          small {
+            color: #777;
+          }
+        }
+      }
+    }
+  }
+  
+  /* Animacija za smooth fade-in/slide */
+  .smooth-animation {
+    animation: fadeInSlide 0.5s ease-out;
+  }
+  
+  @keyframes fadeInSlide {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  
+  /* Modal stilovi */
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+  }
+  .modal-content {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 6px;
+    width: 400px;
+    position: relative;
+    animation: slideDown 0.3s ease;
+    @keyframes slideDown {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      margin-bottom: 0.5rem;
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #999;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      cursor: pointer;
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  

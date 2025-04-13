@@ -1,0 +1,7 @@
+<div class="news-detail" *ngIf="news">
+    <h2>{{ news.title }}</h2>
+    <p>{{ news.content }}</p>
+    <small>Objavljeno: {{ news.date | date:'medium' }}</small>
+  </div>
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+  

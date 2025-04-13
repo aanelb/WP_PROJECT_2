@@ -1,0 +1,19 @@
+<div class="my-news">
+    <h2>Moje Vijesti</h2>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    <div *ngIf="myNews && myNews.length > 0; else noNews">
+      <ul>
+        <li *ngFor="let news of myNews">
+          <h3>{{ news.title }}</h3>
+          <p>{{ news.content }}</p>
+          <small>Datum objave: {{ news.date }}</small>
+          <button (click)="updateNews(news.id)">Uredi</button>
+          <button (click)="deleteNews(news.id)">Obriši</button>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noNews>
+      <p>Nemate objavljenih vijesti.</p>
+    </ng-template>
+  </div>
+  

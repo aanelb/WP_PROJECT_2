@@ -1,0 +1,21 @@
+<div class="news-form">
+  <h2>{{ isEditMode ? 'Ažuriraj vijest' : 'Dodaj vijest' }}</h2>
+  <form [formGroup]="newsForm" (ngSubmit)="onSubmit()">
+    <label for="title">Naslov</label>
+    <input id="title" type="text" formControlName="title" />
+
+    <label for="content">Sadržaj</label>
+    <textarea id="content" formControlName="content"></textarea>
+
+    <label for="datetime">Datum i vrijeme objave</label>
+    <input id="datetime" type="datetime-local" formControlName="datetime" />
+
+    <button type="submit">
+      {{ isEditMode ? 'Ažuriraj' : 'Pošalji' }}
+    </button>
+  </form>
+
+  <div class="error" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+</div>

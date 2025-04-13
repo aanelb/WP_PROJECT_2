@@ -1,0 +1,29 @@
+<div class="admin-dashboard">
+  <h2>Admin Dashboard</h2>
+  
+  <!-- Dugme za dodavanje vijesti -->
+  <button (click)="addNews()">Dodaj vijest</button>
+  
+  <section class="news-management">
+    <h3>Vijesti na čekanju</h3>
+    <ul>
+      <li *ngFor="let news of pendingNews">
+        <strong>{{ news.title }}</strong>
+        <span> (Datum: {{ news.date }})</span>
+        <button (click)="approveNews(news.id)">Odobri</button>
+        <button (click)="deleteNews(news.id)">Obriši</button>
+      </li>
+    </ul>
+  </section>
+  
+  <section class="user-management">
+    <h3>Upravljanje korisnicima</h3>
+    <ul>
+      <li *ngFor="let user of users">
+        <strong>{{ user.username }}</strong>
+        <button (click)="changeUserPassword(user.id)">Promijeni lozinku</button>
+        <button (click)="deleteUser(user.id)">Obriši</button>
+      </li>
+    </ul>
+  </section>
+</div>

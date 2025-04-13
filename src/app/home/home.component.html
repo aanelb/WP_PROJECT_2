@@ -1,0 +1,62 @@
+<div class="home-page">
+  <div class="calendar-and-events">
+    <!-- Kalendar (lijevo) -->
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <h2>CALENDAR</h2>
+        <div class="month-nav">
+          <button (click)="prevMonth()">&#8249;</button>
+          <span>{{ monthName }} {{ currentYear }}</span>
+          <button (click)="nextMonth()">&#8250;</button>
+        </div>
+      </div>
+
+      <div class="calendar-grid">
+        <div class="day-name">Pon</div>
+        <div class="day-name">Uto</div>
+        <div class="day-name">Sri</div>
+        <div class="day-name">Čet</div>
+        <div class="day-name">Pet</div>
+        <div class="day-name">Sub</div>
+        <div class="day-name">Ned</div>
+
+        <ng-container *ngFor="let week of weeks">
+          <ng-container *ngFor="let dayObj of week">
+            <div class="calendar-day"
+              [class.outside]="!dayObj.inMonth"
+              [class.has-event]="dayObj.events?.length > 0"
+              (click)="selectDay(dayObj)">
+              <div class="day-num">{{ dayObj.day }}</div>
+              <div class="event-marker" *ngIf="dayObj.events?.length > 0">
+                + {{ dayObj.events.length }}
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Vijesti za odabrani datum (desno) -->
+    <div class="news-container" *ngIf="selectedDayEvents.length > 0">
+      <h3>Vijesti za odabrani dan</h3>
+      <div class="news-list smooth-animation">
+        <div class="news-item" *ngFor="let ev of selectedDayEvents" (click)="openModal(ev)">
+          <h4>{{ ev.title }}</h4>
+          <p>{{ ev.content | slice:0:50 }}...</p>
+          <small>Objavljeno: {{ ev.date | date:'dd.MM.yyyy HH:mm' }}</small>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Modal prozor za detalje vijesti -->
+  <div class="modal-backdrop" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeModal()">×</button>
+      <h2>{{ selectedEvent?.title }}</h2>
+      <p>{{ selectedEvent?.content }}</p>
+      <small>Objavljeno: {{ selectedEvent?.date | date:'dd.MM.yyyy HH:mm' }}</small>
+    </div>
+  </div>
+</div>

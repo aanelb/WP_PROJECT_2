@@ -1,0 +1,71 @@
+<!-- src/app/register/register.component.html -->
+<div class="register-container">
+  <h2>Registracija</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firstName">Ime</label>
+      <input id="firstName" formControlName="firstName" type="text" placeholder="Vaše ime" />
+      <div class="error" *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.hasError('required')">
+        Ime je obavezno.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Prezime</label>
+      <input id="lastName" formControlName="lastName" type="text" placeholder="Vaše prezime" />
+      <div class="error" *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.hasError('required')">
+        Prezime je obavezno.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Korisničko ime</label>
+      <input id="username" formControlName="username" type="text" placeholder="Korisničko ime" />
+      <div class="error" *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.hasError('required')">
+        Korisničko ime je obavezno.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" type="email" placeholder="primjer@gmail.com" />
+      <div class="error" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.hasError('required')">
+        Email je obavezan.
+      </div>
+      <div class="error" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.hasError('email')">
+        Unesite ispravan email.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Lozinka</label>
+      <input id="password" formControlName="password" type="password" placeholder="Lozinka (min. 6 karaktera)" />
+      <div class="error" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.hasError('required')">
+        Lozinka je obavezna.
+      </div>
+      <div class="error" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.hasError('minlength')">
+        Lozinka mora imati najmanje 6 karaktera.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Potvrdi lozinku</label>
+      <input id="confirmPassword" formControlName="confirmPassword" type="password" placeholder="Potvrda lozinke" />
+      <div class="error" *ngIf="registerForm.touched && registerForm.errors && registerForm.errors['mismatch']">
+        Lozinke se ne podudaraju!
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid">Registruj se</button>
+  </form>
+
+  <!-- Poruka o uspješnoj registraciji -->
+  <div class="success-box" *ngIf="showSuccessMessage">
+    {{ successMessage }}
+  </div>
+
+  <!-- Poruka o grešci -->
+  <div class="error-box" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+</div>
